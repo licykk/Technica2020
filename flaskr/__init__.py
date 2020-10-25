@@ -47,6 +47,8 @@ def create_app(test_config=None):
     from . import translate
     app.register_blueprint(translate.bp)
     app.add_url_rule('/translate', endpoint='translate')
+    app.add_url_rule('/translate/translate', endpoint='translate/translate')
+    app.add_url_rule('/translate/result', endpoint='translate/result')
 
     from . import profile
     app.register_blueprint(profile.bp)

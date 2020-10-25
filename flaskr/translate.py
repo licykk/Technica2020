@@ -9,16 +9,38 @@ from flaskr.db import get_db
 
 bp = Blueprint('translate', __name__, url_prefix='/translate')
 
-@bp.route('/options')
+@bp.route('/')
 def options():
-    return render_template()
+    return render_template('translate/translate.html')
 
 @bp.route('/translate', methods=('GET', 'POST'))
 def translate():
     if request.method == 'POST':
         data = request.form['legalese']
-    return render_template('translate/translate.html')
 
+        result = translate_legalese(data)
+
+    return render_template('translate/result.html', result=result)
+
+# @bp.route('/upload', methods=('GET', 'POST'))
+# def upload():
+#     if request.method == 'POST':
+#         data = request.form['legalese']
+
+#     return render_template('translate/result.html', result=result)
+
+#@bp.route('/picupload', methods=('GET', 'POST'))
+# def picupload():
+#     if request.method == 'POST':
+#         data = request.form['legalese']
+    
+#     result = translate_legalese(data)
+
+#     return render_template('translate/result.html', result=result)
 
 # function that does the hardcore work
-#def translate_legalese():
+def translate_legalese(data):
+    b = get_db()
+    return "hi"
+
+
