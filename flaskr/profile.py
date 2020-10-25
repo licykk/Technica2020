@@ -11,12 +11,12 @@ bp = Blueprint('profile', __name__)
 @bp.route('/profile')
 def index():
     db = get_db()
-    posts = db.execute(
+    documents = db.execute(
         'SELECT p.id, title, body, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
-    return render_template('profile.html', posts=posts)
+    return render_template('profile.html', documents=documents)
 
 def get_document(id, check_author=True):
     document = get_db().execute(
@@ -57,9 +57,9 @@ def update(id):
                 (title, body, id)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('profile.index'))
 
-    return render_template('update.html', post=document)
+    return render_template('update.html', document=document)
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required

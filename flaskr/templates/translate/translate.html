@@ -7,9 +7,10 @@
 <style>
     textarea {
         width: 100%;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.1);
         border: none;
-        outline: none;
+        outline: 1px;
+        color: white;
     }
 
     textarea:focus {
@@ -20,12 +21,12 @@
 </head>
 
 <body>
-    <form form>
-        <textarea id="text" name="text" rows="100" cols="100">
-        Text
-        </textarea>
+    <form method="post">
+        <h5>Input text here:</h5>
+        <textarea id="text" name="legalese" rows="23" cols="60"></textarea>
         <br><br>
-        <input type="submit" value="Submit">
+        <input class="btn btn-lg btn-secondary" type="submit" value="Submit">
+        <br><br>
     </form>
 </body>
 
