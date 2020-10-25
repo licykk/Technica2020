@@ -6,6 +6,8 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
+import requests
+
 
 bp = Blueprint('translate', __name__, url_prefix='/translate')
 
@@ -75,8 +77,8 @@ def translate_legalese(data):
     for line in data.split("\n"):
         for word in line.split(" "):
             try:
-                word = word.lower().strip().translate(str.maketrans('', '', string.punctuation))
-                result += legal_dictionary[word][0]
+                new_word = word.lower().strip().translate(str.maketrans('', '', string.punctuation))
+                result += legal_dictionary[new_word][0]
             except:
                 result += word
             result += " "
@@ -84,3 +86,38 @@ def translate_legalese(data):
     
         
     return result
+
+
+
+# grammar checker
+def auto_correct_text(text):
+    r = requests.post("https://grammarbot.p.rapidapi.com/check",
+        data = {'text': text, 'language': 'en-US'},
+        headers={
+        'x-rapidapi-host': "grammarbot.p.rapidapi.com",
+        'x-rapidapi-key': config.grammar_api,
+        'content-type': "application/x-www-form-urlencoded"
+    })
+    j = r.json()
+    new_text = ''
+    cursor = 0
+    print(j)
+    for match in j["matches"]:
+        offset = match["offset"]
+        length = match["length"]
+        if cursor > offset:
+            continue
+        # build new_text from cursor to current offset
+        new_text += text[cursor:offset]
+        # next add first replacement
+        repls = match["replacements"]
+        if repls and len(repls) > 0:
+            new_text += repls[0]["value"]
+        # update cursor
+        cursor = offset + length
+    
+    # if cursor < text length, then add remaining text to new_text
+    if cursor < len(text):
+        new_text += text[cursor:]
+ 
+    return new_text

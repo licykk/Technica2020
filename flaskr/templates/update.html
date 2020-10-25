@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Edit "{{ document['title'] }}"{% endblock %}</h1>
-{% endblock %}
+
+  <h3>{% block title %}Edit "{{ document['title'] }}"{% endblock %}</h3>
 
 {% block content %}
 <style>
@@ -18,9 +17,30 @@
       color: white;
   }
 
+  input {
+        background-color:rgb(90, 90, 90);
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: center;
+        font-size: 16px;
+        cursor: pointer;
+        width: 20%;
+        height: 40px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    input:hover {
+      color: white;
+      background-color: gray;
+    }
 </style>
 <div class="overflow-auto">
   <body>
+    <h3>Edit "{{ document['title'] }}"</h3>
     <form method="post">
         <h5>Title:</h5>
         <textarea id="text" name="legalese-title" rows="1" cols="60">{{ request.form['title'] or document['title'] }}</textarea>
@@ -28,8 +48,8 @@
         <h5>Input text here:</h5>
         <textarea id="text" name="legalese" rows="23" cols="60">{{ request.form['body'] or document['body'] }}</textarea>
         <br><br>
-        <input class="btn btn-lg btn-secondary" type="submit" value="Submit">
-        <br><br>
+        <input type="submit" value="Submit">
+        <br>
     </form>
     <form action="{{ url_for('profile.delete', id=document['id']) }}" method="post">
       <input class="danger" type="submit" value="Delete">

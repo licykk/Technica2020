@@ -17,7 +17,6 @@ def index():
         ' FROM documents p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
-    print(documents, file=sys.stdout)
     return render_template('profile.html', documents=documents)
 
 def get_document(id, check_author=True):

@@ -3,6 +3,28 @@
 {% block title %}Documents{% endblock %}
 
 {% block content %}
+<style>
+  input {
+        background-color:rgb(90, 90, 90);
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: center;
+        font-size: 16px;
+        cursor: pointer;
+        width: 20%;
+        height: 40px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    input:hover {
+      color: white;
+      background-color: gray;
+    }
+</style>
   <div class="overflow-auto">
   {% for document in documents %}
     <article class="document">
@@ -12,9 +34,17 @@
           <div class="about">{{ document['created'].strftime('%Y-%m-%d') }}</div>
         </div>
       </header>
-      <p class="body">{{ document['body'] }}</p>
+      {% for a in document['body'].split('\n') %}
+        <div>{{ a }}</div>
+      {% endfor %}
+      <br>
       {% if g.user['id'] == document['author_id'] %}
-      <a class="action" href="{{ url_for('profile.update', id=document['id']) }}">Edit</a>
+      <form action="{{ url_for('profile.update', id=document['id']) }}">
+        <input type="submit" value="Edit">
+      </form>
+      <form action="{{ url_for('profile.delete', id=document['id']) }}" method="post">
+        <input class="danger" type="submit" value="Delete">
+      </form>
       {% endif %}
     </article>
     {% if not loop.last %}
