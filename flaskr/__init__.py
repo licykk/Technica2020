@@ -44,4 +44,12 @@ def create_app(test_config=None):
     app.register_blueprint(resources.bp)
     app.add_url_rule('/resources', endpoint='resources')
 
+    from . import translate
+    app.register_blueprint(translate.bp)
+    app.add_url_rule('/translate', endpoint='translate')
+
+    from . import profile
+    app.register_blueprint(profile.bp)
+    app.add_url_rule('/profile', endpoint='profile')
+
     return app
