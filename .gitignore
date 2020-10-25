@@ -14,3 +14,4 @@ build/
 *.egg-info/
 
 virtual-equator-293603-f563cdb5cd1d.json
+config.py

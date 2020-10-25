@@ -4,6 +4,8 @@
 
 {% block content %}
     <h3>{{ title }}</h3>
-    <p class="body">{{ result }}</p>
+    {% for a in result.split('\n') %}
+        <div>{{ a }}</div>
+    {% endfor %}
 
 {% endblock %}
