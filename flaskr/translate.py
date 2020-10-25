@@ -64,6 +64,9 @@ def picupload():
 # find and replace
 import csv
 import string
+import re
+import nltk
+import sys
 
 #get data from csv TrainingData.csv
 legal_dictionary = {}
@@ -72,15 +75,13 @@ with open('TrainingData.csv', 'r') as csvfile:
 	for row in csvreader:
 		legal_dictionary[row[0]] = row[1:]
 
-import nltk
-import sys
 def translate_legalese(data):
 	result = data
 	data = data.lower().strip().translate(str.maketrans('', '', string.punctuation))
 	for phrase in legal_dictionary:
 		if data.find(phrase) > -1:
 			print(phrase, legal_dictionary[phrase][0])
-			result = result.replace(phrase, legal_dictionary[phrase][0])
+			result = re.sub(re.escape(phrase), legal_dictionary[phrase][0], result, flags=re.IGNORECASE)
 
 
 	# for line in data.split("\n"):
