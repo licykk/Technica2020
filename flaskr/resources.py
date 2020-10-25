@@ -7,8 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
 
-bp = Blueprint('index', __name__)
+bp = Blueprint('resources', __name__)
 
-@bp.route('/')
-def index():
-    return render_template('index.html')
+@bp.route('/resources')
+def resources():
+    return render_template('resources.html')

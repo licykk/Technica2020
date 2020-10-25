@@ -39,5 +39,9 @@ def create_app(test_config=None):
     from . import index
     app.register_blueprint(index.bp)
     app.add_url_rule('/', endpoint='index')
+    
+    from . import resources
+    app.register_blueprint(resources.bp)
+    app.add_url_rule('/resources', endpoint='resources')
 
     return app
