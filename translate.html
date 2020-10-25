@@ -4,13 +4,36 @@
 
 {% block content %}
 
-<form form>
-<textarea id="text" name="text" rows="100" cols="100">
-  Text
-  </textarea>
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
+<style>
+    .textarea-container {
+        background: transparent;
+        color: transparent;
+        resize: none;
+        border: 0 none;
+        width: 100%;
+        outline: none;
+        height: 100%;
+        position: absolute;
+    }
 
+    textarea:focus {
+        color: white;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<div class="textarea-container">
+    <form form>
+        <textarea id="text" name="text" rows="100" cols="100">
+        Text
+        </textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
 
 {% endblock %}
