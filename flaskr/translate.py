@@ -39,8 +39,13 @@ def translate():
 #     return render_template('translate/result.html', result=result)
 
 # function that does the hardcore work
+# data is input text
 def translate_legalese(data):
     b = get_db()
+
     return "hi"
 
-
+# find and replace
+def translate_legalese_planB(data):
+    return "hi"
+    
