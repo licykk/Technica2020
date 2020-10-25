@@ -5,16 +5,35 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title"
-      value="{{ request.form['title'] or document['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or document['body'] }}</textarea>
-    <input type="submit" value="Save">
-  </form>
-  <hr>
-  <form action="{{ url_for('blog.delete', id=document['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-  </form>
+<style>
+  textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      outline: 1px;
+      color: white;
+  }
+
+  textarea:focus {
+      color: white;
+  }
+
+</style>
+<div class="overflow-auto">
+  <body>
+    <form method="post">
+        <h5>Title:</h5>
+        <textarea id="text" name="legalese-title" rows="1" cols="60">{{ request.form['title'] or document['title'] }}</textarea>
+        <br><br>
+        <h5>Input text here:</h5>
+        <textarea id="text" name="legalese" rows="23" cols="60">{{ request.form['body'] or document['body'] }}</textarea>
+        <br><br>
+        <input class="btn btn-lg btn-secondary" type="submit" value="Submit">
+        <br><br>
+    </form>
+    <form action="{{ url_for('profile.delete', id=document['id']) }}" method="post">
+      <input class="danger" type="submit" value="Delete">
+    </form>
+  </body>
+</div>
 {% endblock %}

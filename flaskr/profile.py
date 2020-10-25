@@ -10,18 +10,20 @@ bp = Blueprint('profile', __name__)
 
 @bp.route('/profile')
 def index():
+    import sys
     db = get_db()
     documents = db.execute(
         'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' FROM documents p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
+    print(documents, file=sys.stdout)
     return render_template('profile.html', documents=documents)
 
 def get_document(id, check_author=True):
     document = get_db().execute(
         'SELECT p.id, title, body, created, author_id, username'
-        ' FROM document p JOIN user u ON p.author_id = u.id'
+        ' FROM documents p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
     ).fetchone()
@@ -40,8 +42,8 @@ def update(id):
     document = get_document(id)
 
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
+        title = request.form['legalese-title']
+        body = request.form['legalese']
         error = None
 
         if not title:
@@ -52,7 +54,7 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?'
+                'UPDATE documents SET title = ?, body = ?'
                 ' WHERE id = ?',
                 (title, body, id)
             )
@@ -66,6 +68,6 @@ def update(id):
 def delete(id):
     get_document(id)
     db = get_db()
-    db.execute('DELETE FROM document WHERE id = ?', (id,))
+    db.execute('DELETE FROM documents WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('profile'))
