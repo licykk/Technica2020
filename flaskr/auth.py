@@ -61,7 +61,7 @@ def login():
 
         flash(error)
 
-    return render_template('auth/login.html')
+    return render_template('auth/login_form.html')
 
 # Check if user is logged in or not
 @bp.before_app_request
