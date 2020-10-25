@@ -13,14 +13,16 @@ bp = Blueprint('translate', __name__, url_prefix='/translate')
 def options():
     return render_template('translate/translate.html')
 
+
 @bp.route('/translate', methods=('GET', 'POST'))
 def translate():
     if request.method == 'POST':
+        print("H")
         data = request.form['legalese']
-
         result = translate_legalese(data)
+        return render_template('translate/result.html', result=result)
 
-    return render_template('translate/result.html', result=result)
+    return render_template('translate/translate.html')
 
 # @bp.route('/upload', methods=('GET', 'POST'))
 # def upload():
@@ -44,7 +46,7 @@ def translate_legalese(data):
     b = get_db()
     result = "Put result here"
 
-    
+
     return "hi"
 
 # find and replace
