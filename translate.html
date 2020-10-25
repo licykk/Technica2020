@@ -5,27 +5,21 @@
 {% block content %}
 
 <style>
-    .textarea-container {
-        background: transparent;
-        color: transparent;
-        resize: none;
-        border: 0 none;
+    textarea {
         width: 100%;
+        background: transparent;
+        border: none;
         outline: none;
-        height: 100%;
-        position: absolute;
     }
 
     textarea:focus {
         color: white;
     }
-}
 
 </style>
 </head>
 
 <body>
-<div class="textarea-container">
     <form form>
         <textarea id="text" name="text" rows="100" cols="100">
         Text
@@ -33,7 +27,6 @@
         <br><br>
         <input type="submit" value="Submit">
     </form>
-</div>
 </body>
 
 {% endblock %}

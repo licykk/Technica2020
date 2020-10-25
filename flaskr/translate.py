@@ -42,7 +42,9 @@ def translate():
 # data is input text
 def translate_legalese(data):
     b = get_db()
+    result = "Put result here"
 
+    
     return "hi"
 
 # find and replace

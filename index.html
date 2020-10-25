@@ -128,11 +128,21 @@
         text-decoration: none;
         display: center;
         font-size: 16px;
-        /* margin: 4px 2px; */
         cursor: pointer;
         width: 100%;
         margin-bottom: 3px;
       }
+
+      textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+
+    textarea:focus {
+        color: white;
+    }
     
       /* .close:hover,
       .close:focus {
@@ -164,6 +174,14 @@
             <button class="button">Read from File</button>
           </div>
         </div>
+
+        <form form>
+        <textarea id="text" name="text" rows="100" cols="100">
+        Text
+        </textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
     
         <script>
           // Get the modal
